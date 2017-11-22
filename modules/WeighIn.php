@@ -9,14 +9,19 @@ include_once('../../modules/CompetitionResult.php');
 include_once('../../modules/File.php');
 class WeighIn{
   public $connection;
-  public $db_name     = 'recapp';
+  public $db_name     = 'recapp_v2';
   public $table_name  = 'weighins';
   public $col_name;
   public $id;
-  public $competitor;
-  public $competition;
-  public $team;
+  public $competitor_id;
+  public $competitor_name;
+  public $competition_id;
+  public $competition_name;
+  public $team_id;
+  public $team_name;
   public $week;
+  public $weight;
+  public $date_entered;
   public $Competitor;
   public $Competition;
   public $Team;
@@ -44,21 +49,30 @@ class WeighIn{
 
     $sql = "INSERT INTO `".$this->table_name."`(
       `weigh_in_ID`,
-      `weigh_in_competitor`,
-      `weigh_in_competition`,
-      `weigh_in_team`,
+      `weigh_in_competitor_ID`,
+      `weigh_in_competitor_name`,
+      `weigh_in_competition_ID`,
+      `weigh_in_competition_name`,
+      `weigh_in_team_ID`,
+      `weigh_in_team_name`,
       `weigh_in_week`,
       `weigh_in_weight`,
       `weigh_in_date_entered`
     ) VALUES (
       NULL,
-      '$this->competitor',
-      '$this->competition',
-      '$this->team',
+      '$this->competitor_id',
+      '$this->competitor_name',
+      '$this->competition_id',
+      '$this->competition_name',
+      '$this->team_id',
+      '$this->team_name',
       '$this->week',
       '$this->weight',
       CURRENT_TIMESTAMP
     );";
+                // echo('<pre>');
+                // print_r($sql);
+                // echo('</pre>'); 
 
     $this->process_query($sql);
   }
@@ -68,13 +82,16 @@ class WeighIn{
   {
     $sql = "CREATE TABLE IF NOT EXISTS ".$this->table_name." ( ";
     $sql .= "`weigh_in_ID` INT UNSIGNED NOT NULL AUTO_INCREMENT , ";
-    $sql .= "`weigh_in_competitor` VARCHAR(100) NULL , ";
-    $sql .= "`weigh_in_competition` VARCHAR(100) NULL , ";
-    $sql .= "`weigh_in_team` VARCHAR(100) NULL , ";
+    $sql .= "`weigh_in_competitor_ID` INT UNSIGNED NOT NULL , ";
+    $sql .= "`weigh_in_competitor_name` VARCHAR(100) NULL , ";
+    $sql .= "`weigh_in_competition_ID` INT UNSIGNED NOT NULL , ";
+    $sql .= "`weigh_in_competition_name` VARCHAR(100) NULL , ";
+    $sql .= "`weigh_in_team_ID` INT UNSIGNED NOT NULL , ";
+    $sql .= "`weigh_in_team_name` VARCHAR(100) NULL , ";
     $sql .= "`weigh_in_week` VARCHAR(100) NULL , ";
     $sql .= "`weigh_in_weight` DECIMAL(4,1) NULL , ";
     $sql .= "`weigh_in_date_entered` DATETIME NOT NULL , ";
-    $sql .= "UNIQUE (`weigh_in_competitor`, `weigh_in_week`), ";
+    $sql .= "UNIQUE (`weigh_in_competitor_ID`, `weigh_in_week`), ";
     $sql .= "PRIMARY KEY (`weigh_in_ID`)";
     $sql .= ") ENGINE = InnoDB;";
                 // echo('<pre>');
@@ -87,11 +104,14 @@ class WeighIn{
           // ***** Create Weigh In *****
             public function create_weigh_in($params)
             {
-              $this->competitor  = $this->get_competitor_name($params['competitor']);
-              $this->competition = $this->get_competition_name($params['competition']);
-              $this->team        = $this->get_team_name($params['team']);
-              $this->week        = $this->get_week_name($params['week']);
-              $this->weight      = $params['weight'];
+              $this->competitor_id    = $params['competitor_id'];
+              $this->competitor_name  = $this->get_competitor_name($params['competitor_id']);
+              $this->competition_id   = $params['competition_id'];
+              $this->competition_name = $this->get_competition_name($params['competition_id']);
+              $this->team_id          = $params['team_id'];
+              $this->team_name        = $this->get_team_name($params['team_id']);
+              $this->week             = $this->get_week_name($params['week_id']);
+              $this->weight           = $params['weight'];
               $this->add_weigh_in();
             }
 

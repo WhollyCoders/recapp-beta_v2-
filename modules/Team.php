@@ -1,7 +1,7 @@
 <?php
 // require('../../../__CONNECT/recapp-connect.php');
 class Team{
-  public $db_name     = 'recapp';
+  public $db_name     = 'recapp_v2';
   public $table_name  = 'teams';
   public $connection;
   public $id;
@@ -47,7 +47,7 @@ class Team{
        `team_name` VARCHAR(50) NOT NULL ,
        `team_details` TEXT NULL ,
        `team_competition_ID` INT NULL,
-       `team_date_entered` DATETIME NOT NULL ,
+       `team_date_entered` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
        PRIMARY KEY (`team_ID`)
      ) ENGINE = InnoDB;";
     $result = $this->process_query($sql);

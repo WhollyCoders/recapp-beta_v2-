@@ -1,7 +1,7 @@
 <?php
 // require('../../__CONNECT/recapp-connect.php');
 class Competition{
-  public $db_name     = 'recapp';
+  public $db_name     = 'recapp_v2';
   public $table_name  = 'competitions';
   public $connection;
   public $id;

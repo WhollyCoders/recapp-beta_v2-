@@ -4,11 +4,11 @@ if(isset($_POST['add_weigh_in']))
 
   require('./config.php');
   $params = array(
-    'competitor'      =>    $competitor   = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_competitor']))),
-    'competition'     =>    $competition  = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_competition']))),
-    'team'            =>    $team         = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_team']))),
-    'week'            =>    $week         = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_week']))),
-    'weight'          =>    $weight       = mysqli_real_escape_string($connection, trim($_POST['add_weight']))
+    'competitor_id'      =>    $competitor   = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_competitor']))),
+    'competition_id'     =>    $competition  = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_competition']))),
+    'team_id'            =>    $team         = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_team']))),
+    'week_id'            =>    $week         = ucfirst(mysqli_real_escape_string($connection, trim($_POST['add_week']))),
+    'weight'             =>    $weight       = mysqli_real_escape_string($connection, trim($_POST['add_weight']))
   );
 
   $WeighIn = new WeighIn($connection);

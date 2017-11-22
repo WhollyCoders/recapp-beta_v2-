@@ -1,7 +1,7 @@
 <?php
   class Week{
     public $connection;
-    public $db_name = 'recapp';
+    public $db_name = 'recapp_v2';
     public $table_name = 'weeks';
     public $id;
     public $name;
@@ -48,7 +48,7 @@
       $sql .= "`week_sss` VARCHAR(255) NULL , ";
       $sql .= "`week_memory` VARCHAR(255) NULL , ";
       $sql .= "`week_competition_ID` INT UNSIGNED NULL , ";
-      $sql .= "`week_date_entered` DATETIME NOT NULL , ";
+      $sql .= "`week_date_entered` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ";
       $sql .= "PRIMARY KEY (`week_ID`)";
       $sql .= ") ENGINE = InnoDB;";
 

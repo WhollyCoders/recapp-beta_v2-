@@ -2,8 +2,8 @@
 // require('../../../__CONNECT/recapp-connect.php');
 class Result
 {
-    public $db_name     = 'recapp';
-    public $competition = 'Bod4God';
+    public $db_name     = 'recapp_v2';
+    public $competition = 'Losing2Live';
     public $table_name  = 'results';
     public $connection;
     public $begin;

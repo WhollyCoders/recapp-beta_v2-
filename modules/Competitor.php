@@ -2,11 +2,15 @@
 // require('../../__CONNECT/recapp-connect.php');
   class Competitor{
     public $connection;
-    public $db_name = 'recapp';
+    public $db_name = 'recapp_v2';
     public $table_name = 'competitors';
     public $id;
     public $firstname;
     public $lastname;
+    public $email;
+    public $phone;
+    public $team_id;
+    public $team_name;
     public $data;
     public $json;
 
@@ -19,7 +23,12 @@
     public function add_competitor($params){
       $this->firstname   =   $params['firstname'];
       $this->lastname    =   $params['lastname'];
+      $this->email       =   $params['email'];
+      $this->phone       =   $params['phone'];
+      $this->team_id     =   $params['team_id'];
+      $this->team_name   =   $params['team'];
       $this->create_competitor();
+      redirect('./new.php');
     }
 
 // ***** Create Competitor *****
@@ -28,13 +37,22 @@
         `competitor_ID`,
         `competitor_firstname`,
         `competitor_lastname`,
+        `competitor_email`,
+        `competitor_phone`,
+        `competitor_team_id`,
+        `competitor_team_name`,
         `competitor_date_entered`
       ) VALUES (
         NULL,
         '$this->firstname',
         '$this->lastname',
+        '$this->email',
+        '$this->phone',
+        '$this->team_id',
+        '$this->team_name',
         CURRENT_TIMESTAMP
       );";
+      prewrap($sql);
       $result = mysqli_query($this->connection, $sql);
       if(!$result){
         echo('There has been an ERROR!!!<br>');
@@ -42,8 +60,6 @@
         // echo('Competitor Added Successfully!!!<br>');
       }
     }
-
-    // INSERT INTO `competitors` (`competitor_ID`, `competitor_firstname`, `competitor_lastname`, `competitor_email`, `competitor_phone`, `competitor_team_ID`, `competitor_date_entered`) VALUES (NULL, 'michael', 'parks', NULL, NULL, '0', CURRENT_TIMESTAMP), (NULL, 'rochelle', 'parks', NULL, NULL, '0', CURRENT_TIMESTAMP);
 
 // ***** CREATE Competitor Table *****
     public function create_table(){
@@ -53,14 +69,11 @@
       $sql .= "`competitor_lastname` VARCHAR(100) NOT NULL , ";
       $sql .= "`competitor_email` VARCHAR(100) NULL , ";
       $sql .= "`competitor_phone` VARCHAR(20) NULL , ";
-      $sql .= "`competitor_team_ID` INT(10) UNSIGNED NOT NULL DEFAULT '0', ";
-      $sql .= "`competitor_date_entered` DATETIME NOT NULL , ";
+      $sql .= "`competitor_team_ID` INT UNSIGNED NOT NULL DEFAULT '0', ";
+      $sql .= "`competitor_team_name` VARCHAR(100) NULL , ";
+      $sql .= "`competitor_date_entered` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ";
       $sql .= "PRIMARY KEY (`competitor_ID`)";
       $sql .= ") ENGINE = InnoDB;";
-
-    // echo('<pre>');
-    // print_r($sql);
-    // echo('</pre><br>');
 
       $result = mysqli_query($this->connection, $sql);
       if(!$result){
@@ -130,6 +143,7 @@
             'email'           =>    $row['competitor_email'],
             'phone'           =>    $row['competitor_phone'],
             'team_ID'         =>    $row['competitor_team_ID'],
+            'team_name'       =>    $row['competitor_team_name'],
             'date_entered'    =>    $row['competitor_date_entered']
           );
         }
@@ -144,6 +158,7 @@
           'email'           =>    $row['competitor_email'],
           'phone'           =>    $row['competitor_phone'],
           'team_ID'         =>    $row['competitor_team_ID'],
+          'team_name'       =>    $row['competitor_team_name'],
           'date_entered'    =>    $row['competitor_date_entered']
         );
 

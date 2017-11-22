@@ -44,14 +44,14 @@ $Weeks        = $WeighIn->get_weeks();
           <select name="add_competitor">
               <option value="null"><strong>Select Competitor</strong></option>
             <?php foreach ($Competitors as $competitor) { ?>
-              <option value="<?php echo($competitor['id']);?>"><?php echo($competitor['firstname'].' '.$competitor['lastname']);?></option>
+              <option value="<?php echo($competitor['id']);?>"><?php echo($competitor['firstname'].' '.$competitor['lastname']);?> (<?php echo($competitor['id']);?>) </option>
             <?php }?>
           </select>
         </p>
         <p>
           <label><strong>Competition</strong></label><br>
           <select name="add_competition">
-              <option value="1"><strong>Bod4God</strong></option>
+              <option value="1"><strong>Losing2Live</strong></option>
             <!-- <?php foreach ($Competitions as $competition) { ?>
               <option value="<?php echo($competition['id']);?>"><?php echo($competition['name']);?></option>
             <?php }?> -->
@@ -62,7 +62,7 @@ $Weeks        = $WeighIn->get_weeks();
           <select name="add_team">
               <option value="null"><strong>Select Team</strong></option>
             <?php foreach ($Teams as $team) { ?>
-              <option value="<?php echo($team['id']);?>"><?php echo($team['name']);?></option>
+              <option value="<?php echo($team['id']);?>"><?php echo($team['name']);?> (<?php echo($team['id']);?>) </option>
             <?php }?>
           </select>
         </p>
@@ -71,7 +71,7 @@ $Weeks        = $WeighIn->get_weeks();
           <select name="add_week">
               <option value="null"><strong>Select Week</strong></option>
             <?php foreach ($Weeks as $week) { ?>
-              <option value="<?php echo($week['id']);?>"><?php echo($week['name']);?></option>
+              <option value="<?php echo($week['id']);?>"><?php echo($week['name']);?> (<?php echo($week['description']);?>)</option>
             <?php }?>
           </select>
         </p>
