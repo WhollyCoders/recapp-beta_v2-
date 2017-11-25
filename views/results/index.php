@@ -9,6 +9,8 @@
 
   require('./config.php');
     $WeighIn            = new WeighIn($connection);
+    // *** Table Reset ***
+    $WeighIn->reset_tables();
     $Teams              = $WeighIn->get_teams();
     $Result             = new Result($connection);
     $TeamResult         = new TeamResult($connection);
@@ -74,8 +76,8 @@
             </div>
             <h2>Weekly Statistics From Week Ending - <span><?php echo($week_ending_date); ?></span></h2>
             <h3>
-              Our total weight loss from <?php echo($week); ?> is <span><?php echo($weekly_weight_loss_comp); ?></span> pounds!!!<br>
-              Our overall total overall weight loss for the competition is <span><?php echo($weekly_weight_loss_over); ?></span> pounds!!!
+              Our total weight loss from <?php echo($week); ?> is <span><?php echo($weekly_weight_loss_comp); ?> </span> pounds!!!<br>
+              Our overall total overall weight loss <br>for the competition is <span><?php echo($weekly_weight_loss_over); ?> </span> pounds!!!
             </h3> 
             <div class="section-team">
               <h2>Team Names</h2>

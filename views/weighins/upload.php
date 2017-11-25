@@ -5,9 +5,10 @@ if(isset($_POST['upload_csv']))
     if($file = $_FILES['file']['name'])
     {
         $files_array = $_FILES;
+        prewrap($files_array);
         $File = new File($connection, $files_array);
         $File->import_csv();
-        // prewrap($File);
+        prewrap($File);
     }
 }
 

@@ -37,7 +37,12 @@ class CompetitionResult extends Result
     {
         $sql = "SELECT sum(weigh_in_weight) as current_weight  
         FROM `weighins` 
-        WHERE weigh_in_week = '".$this->current_week."' LIMIT 1";
+        WHERE weigh_in_week = '".$this->current_week."' LIMIT 1;";
+        
+        // echo('<pre>');
+        // print_r($sql);
+        // echo('</pre>');
+
         $result = $this->process_query($sql);
         if($result)
         {

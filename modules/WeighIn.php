@@ -621,6 +621,16 @@ return $this->get_results_data($result);
     $this->weight         = $params['weight'];
     $this->edit_weigh_in();
   }
+// *** Reset Tables ***
+  public function reset_tables()
+  {
+    $sql = "DROP TABLE `competition_results`;";
+    $result = $this->process_query($sql);
+    $sql = "DROP TABLE `team_results`;";
+    $result = $this->process_query($sql);
+    $sql = "DROP TABLE `results`;";
+    $result = $this->process_query($sql);
+  }
 /// *** Set Weights ***
   public function set_weights()
   {

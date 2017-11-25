@@ -71,30 +71,40 @@
                 $processed = false;
                 while($data = fgetcsv($handle))
                 {
-                    if($processed == false){
+                    if($processed == false)
+                    {
                         $this->header = $data;
                         $processed = true;
                         continue;
                     }
-                    $competitor     = ucfirst(mysqli_real_escape_string($this->connection, $data[0]));
-                    $competition    = ucfirst(mysqli_real_escape_string($this->connection, $data[1]));
-                    $team           = ucfirst(mysqli_real_escape_string($this->connection, $data[2]));
-                    $week           = ucfirst(mysqli_real_escape_string($this->connection, $data[3]));
-                    $weight         = mysqli_real_escape_string($this->connection, $data[4]);
+                    $team_id               = trim(mysqli_real_escape_string($this->connection, $data[0]), "T");
+                    $competitor_id         = ucfirst(mysqli_real_escape_string($this->connection, $data[1]));
+                    $competitor_name       = competitor(ucfirst(mysqli_real_escape_string($this->connection, $data[2])));
+                    $competition_id        = ucfirst(mysqli_real_escape_string($this->connection, $data[3]));
+                    $competition_name      = ucfirst(mysqli_real_escape_string($this->connection, $data[4]));
+                    $team_name             = ucfirst(mysqli_real_escape_string($this->connection, $data[5]));
+                    $week                  = mysqli_real_escape_string($this->connection, $data[6]);
+                    $weight                = mysqli_real_escape_string($this->connection, $data[7]);
 
                     $sql = "INSERT INTO weighins(
                         weigh_in_ID, 
-                        weigh_in_competitor, 
-                        weigh_in_competition, 
-                        weigh_in_team, 
+                        weigh_in_competitor_ID, 
+                        weigh_in_competitor_name, 
+                        weigh_in_competition_ID,
+                        weigh_in_competition_name, 
+                        weigh_in_team_ID, 
+                        weigh_in_team_name, 
                         weigh_in_week,
                         weigh_in_weight,
                         weigh_in_date_entered
                     ) values(
                         NULL,
-                        '$competitor',
-                        '$competition',
-                        '$team',
+                        '$competitor_id',
+                        '$competitor_name',
+                        '$competition_id',
+                        '$competition_name',
+                        '$team_id',
+                        '$team_name',
                         '$week',
                         '$weight',
                         CURRENT_TIMESTAMP

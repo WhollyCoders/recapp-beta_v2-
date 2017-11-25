@@ -44,13 +44,13 @@ class Result
         $sql = "SELECT * 
                 FROM weighins
                 WHERE weigh_in_week='$week';";
-
+        // prewrap($sql);
         $result = $this->process_query($sql);
         if($result){
             while($row = mysqli_fetch_assoc($result)){
                 $this->data = array(
-                    'competitor'  =>      $row['weigh_in_competitor'],
-                    'team'        =>      $row['weigh_in_team'],
+                    'competitor'  =>      $row['weigh_in_competitor_name'],
+                    'team'        =>      $row['weigh_in_team_name'],
                     'week'        =>      $row['weigh_in_week']
                 );
                 $this->get_results($this->data);
@@ -69,9 +69,10 @@ class Result
     protected function get_begin_weight()
     {
         $sql = "SELECT weigh_in_weight FROM `weighins` 
-        WHERE weigh_in_competitor = '".$this->competitor."'
-        AND weigh_in_competition = '".$this->competition."'
+        WHERE weigh_in_competitor_name = '".$this->competitor."'
+        AND weigh_in_competition_name = '".$this->competition."'
         AND weigh_in_week = '".$this->begin_week."' LIMIT 1;";
+        // prewrap($sql);
         $result = $this->process_query($sql);
         if($result){
         $row = mysqli_fetch_assoc($result);
@@ -82,9 +83,10 @@ class Result
     protected function get_previous_weight()
     {
         $sql = "SELECT weigh_in_weight FROM `weighins` 
-        WHERE weigh_in_competitor = '".$this->competitor."' 
-        AND weigh_in_competition = '".$this->competition."'
-        AND weigh_in_week = '".$this->previous_week."' LIMIT 1";
+        WHERE weigh_in_competitor_name = '".$this->competitor."' 
+        AND weigh_in_competition_name = '".$this->competition."'
+        AND weigh_in_week = '".$this->previous_week."' LIMIT 1;";
+        // prewrap($sql);
         $result = $this->process_query($sql);
         if($result)
         {
@@ -96,9 +98,10 @@ class Result
     protected function get_current_weight()
     {
         $sql = "SELECT weigh_in_weight FROM `weighins` 
-        WHERE weigh_in_competitor = '".$this->competitor."' 
-        AND weigh_in_competition = '".$this->competition."'
-        AND weigh_in_week = '".$this->current_week."' LIMIT 1";
+        WHERE weigh_in_competitor_name = '".$this->competitor."' 
+        AND weigh_in_competition_name = '".$this->competition."'
+        AND weigh_in_week = '".$this->current_week."' LIMIT 1;";
+        // prewrap($sql);
         $result = $this->process_query($sql);
         if($result)
         {

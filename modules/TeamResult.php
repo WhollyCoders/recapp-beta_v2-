@@ -12,8 +12,8 @@ class TeamResult extends Result
     {
         $sql = "SELECT sum(weigh_in_weight) as begin_weight
         FROM `weighins` 
-        WHERE weigh_in_team = '".$this->team."'
-        AND weigh_in_competition = '".$this->competition."'
+        WHERE weigh_in_team_name = '".$this->team."'
+        AND weigh_in_competition_name = '".$this->competition."'
         AND weigh_in_week = '".$this->begin_week."' LIMIT 1;";
         $result = $this->process_query($sql);
         if($result){
@@ -26,8 +26,8 @@ class TeamResult extends Result
     {
         $sql = "SELECT sum(weigh_in_weight) as previous_weight 
         FROM `weighins` 
-        WHERE weigh_in_team = '".$this->team."'
-        AND weigh_in_competition = '".$this->competition."'
+        WHERE weigh_in_team_name = '".$this->team."'
+        AND weigh_in_competition_name = '".$this->competition."'
         AND weigh_in_week = '".$this->previous_week."' LIMIT 1";
         $result = $this->process_query($sql);
         if($result)
@@ -41,8 +41,8 @@ class TeamResult extends Result
     {
         $sql = "SELECT sum(weigh_in_weight) as current_weight  
         FROM `weighins` 
-        WHERE weigh_in_team = '".$this->team."'
-        AND weigh_in_competition = '".$this->competition."'
+        WHERE weigh_in_team_name = '".$this->team."'
+        AND weigh_in_competition_name = '".$this->competition."'
         AND weigh_in_week = '".$this->current_week."' LIMIT 1";
         $result = $this->process_query($sql);
         if($result)
